@@ -36,8 +36,8 @@ const components = [
   // Add more components...
 ]
 
-const frameworks = ['All', 'React', 'Vue', 'Angular', 'Svelte']
-const categories = ['All', 'Buttons', 'Layout', 'Forms', 'Navigation', 'Data Display']
+const frameworks = ['All Frameworks', 'React', 'Vue', 'Angular', 'Svelte']
+const categories = ['All Categories', 'Buttons', 'Layout', 'Forms', 'Navigation', 'Data Display']
 
 const stats = [
   { label: 'Total Components', value: '1,234', icon: FiGrid },
@@ -48,57 +48,36 @@ const stats = [
 
 export function ComponentsContent() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedFramework, setSelectedFramework] = useState('All')
-  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [selectedFramework, setSelectedFramework] = useState('All Frameworks')
+  const [selectedCategory, setSelectedCategory] = useState('All Categories')
 
   const filteredComponents = components.filter((component) => {
     const matchesSearch = component.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       component.description.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesFramework = selectedFramework === 'All' || component.framework === selectedFramework
-    const matchesCategory = selectedCategory === 'All' || component.category === selectedCategory
+    const matchesFramework = selectedFramework === 'All Frameworks' || component.framework === selectedFramework
+    const matchesCategory = selectedCategory === 'All Categories' || component.category === selectedCategory
     return matchesSearch && matchesFramework && matchesCategory
   })
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/20 py-20">
-        <div className="container relative z-10">
-          <MotionH1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl"
-          >
-            Discover
-            <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              {" "}Beautiful Components
-            </span>
-          </MotionH1>
-          <MotionP
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mx-auto mt-6 max-w-2xl text-center text-lg text-muted-foreground"
-          >
-            Explore our collection of modern, accessible, and customizable UI components
-            for your next project.
-          </MotionP>
-
+      <section className="relative overflow-hidden">
+        <div className="relative z-10">
           {/* Stats Grid */}
           <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
           >
             {stats.map((stat, index) => (
               <Card key={stat.label} className="border-none bg-background/50 backdrop-blur">
-                <CardContent className="flex items-center space-x-4 p-6">
-                  <div className="rounded-lg bg-primary/10 p-3">
-                    <stat.icon className="h-6 w-6 text-primary" />
+                <CardContent className="flex items-center gap-4 p-4">
+                  <div className="rounded-lg bg-primary/10 p-2">
+                    <stat.icon className="size-4 text-primary" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold">{stat.value}</p>
+                    <p className="text-xl font-bold">{stat.value}</p>
                     <p className="text-sm text-muted-foreground">{stat.label}</p>
                   </div>
                 </CardContent>
@@ -106,17 +85,11 @@ export function ComponentsContent() {
             ))}
           </MotionDiv>
         </div>
-
-        {/* Background Elements */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
-        </div>
       </section>
 
       {/* Filters Section */}
       <section className="sticky top-14 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container py-4">
+        <div className="py-4">
           <div className="grid gap-4 md:grid-cols-3">
             <div className="relative">
               <FiSearch className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -156,8 +129,8 @@ export function ComponentsContent() {
       </section>
 
       {/* Component Grid */}
-      <section className="container py-12">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="py-8">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredComponents.map((component) => (
             <MotionDiv
               key={component.id}

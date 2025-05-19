@@ -11,18 +11,36 @@ import { MotionH1, MotionP, MotionDiv } from "../ui/motion";
 export default function IsometricUISection() {
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
+    const [currentDate, setCurrentDate] = useState(new Date());
 
     useEffect(() => {
         setMounted(true);
+        // Update date every minute
+        const timer = setInterval(() => {
+            setCurrentDate(new Date());
+        }, 60000);
+        return () => clearInterval(timer);
     }, []);
+
+    const getDaysInMonth = (date: Date) => {
+        return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    };
+
+    const getFirstDayOfMonth = (date: Date) => {
+        return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    };
+
+    const formatMonthYear = (date: Date) => {
+        return date.toLocaleString('default', { month: 'long', year: 'numeric' });
+    };
 
     if (!mounted) return null;
 
     return (
         <section className="relative overflow-hidden py-10">
             {/* Enhanced grid background */}
-            <div className="absolute w-full h-full inset-0 z-0 overflow-hidden">
-                <div className="relative w-full h-full">
+            <div className="absolute w-full h-full flex justify-end inset-0 z-0 overflow-hidden">
+                <div className="relative w-7/12 h-full">
                     <svg
                         className="w-full h-full opacity-20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -35,8 +53,8 @@ export default function IsometricUISection() {
                                 id="mesh"
                                 x="0"
                                 y="0"
-                                width="20"
-                                height="42"
+                                width="40"
+                                height="40"
                                 patternUnits="userSpaceOnUse"
                             >
                                 <path
@@ -49,11 +67,18 @@ export default function IsometricUISection() {
                             <mask id="fadeMask">
                                 <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                                     <stop offset="0%" stopColor="white" stopOpacity="0" />
-                                    <stop offset="15%" stopColor="white" stopOpacity="1" />
-                                    <stop offset="85%" stopColor="white" stopOpacity="1" />
+                                    <stop offset="15%" stopColor="white" stopOpacity="0.3" />
+                                    <stop offset="85%" stopColor="white" stopOpacity="0.3" />
+                                    <stop offset="100%" stopColor="white" stopOpacity="0" />
+                                </linearGradient>
+                                <linearGradient id="sideFadeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="white" stopOpacity="0" />
+                                    <stop offset="15%" stopColor="white" stopOpacity="0.3" />
+                                    <stop offset="85%" stopColor="white" stopOpacity="0.3" />
                                     <stop offset="100%" stopColor="white" stopOpacity="0" />
                                 </linearGradient>
                                 <rect width="100%" height="100%" fill="url(#fadeGradient)" />
+                                <rect width="100%" height="100%" fill="url(#sideFadeGradient)" />
                             </mask>
                         </defs>
                         <rect width="100%" height="100%" fill="url(#mesh)" mask="url(#fadeMask)" />
@@ -91,7 +116,7 @@ export default function IsometricUISection() {
                         className="mt-8 flex flex-wrap items-center justify-center xl:justify-start gap-4 w-full"
                     >
                         <Button asChild className="group">
-                            <Link href="/components">
+                            <Link href="/docs">
                                 Get Started
                                 <FiArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
                             </Link>
@@ -110,54 +135,148 @@ export default function IsometricUISection() {
                 <div className="w-full lg:w-7/12 h-[610px] relative hidden xl:block overflow-visible">
                     {/* Connecting Lines - Straight lines only */}
                     <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
-                        {/* Theme Card Line - Top Left */}
+                        <defs>
+                            <linearGradient id="pulseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="currentColor" stopOpacity="0.2">
+                                    <animate attributeName="stop-opacity" values="0.2;0.8;0.2" dur="2s" repeatCount="indefinite" />
+                                </stop>
+                                <stop offset="50%" stopColor="currentColor" stopOpacity="0.8">
+                                    <animate attributeName="stop-opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite" />
+                                </stop>
+                                <stop offset="100%" stopColor="currentColor" stopOpacity="0.2">
+                                    <animate attributeName="stop-opacity" values="0.2;0.8;0.2" dur="2s" repeatCount="indefinite" />
+                                </stop>
+                            </linearGradient>
+                        </defs>
+                        {/* Base lines - grayscale */}
                         <path
                             d="M 130 72 L 130 315 L 340 315"
                             stroke="currentColor"
                             strokeWidth="1"
                             fill="none"
-                            className="text-primary/20"
+                            className="text-primary/10"
                         />
-                        {/* Calendar Card Line - Top Right */}
                         <path
                             d="M 580 72 L 580 315 L 360 315"
                             stroke="currentColor"
                             strokeWidth="1"
                             fill="none"
-                            className="text-primary/20"
+                            className="text-primary/10"
                         />
-                        {/* Analytics Card Line - Bottom Right */}
                         <path
                             d="M 580 528 L 580 335 L 360 335"
                             stroke="currentColor"
                             strokeWidth="1"
                             fill="none"
-                            className="text-primary/20"
+                            className="text-primary/10"
                         />
-                        {/* Notification Card Line - Bottom Left */}
                         <path
                             d="M 130 528 L 130 335 L 340 335"
                             stroke="currentColor"
                             strokeWidth="1"
                             fill="none"
-                            className="text-primary/20"
+                            className="text-primary/10"
                         />
-                        {/* Top Component Line */}
                         <path
                             d="M 352 0 L 352 315"
                             stroke="currentColor"
                             strokeWidth="1"
                             fill="none"
-                            className="text-primary/20"
+                            className="text-primary/10"
                         />
-                        {/* Bottom Component Line */}
                         <path
                             d="M 352 600 L 352 300"
                             stroke="currentColor"
                             strokeWidth="1"
                             fill="none"
-                            className="text-primary/20"
+                            className="text-primary/10"
                         />
+
+                        {/* Animated lines */}
+                        <path
+                            d="M 130 72 L 130 315 L 340 315"
+                            stroke="url(#pulseGradient)"
+                            strokeWidth="1.5"
+                            fill="none"
+                            className="text-primary/40"
+                        >
+                            <animate
+                                attributeName="stroke-dasharray"
+                                values="0,1000;1000,0"
+                                dur="2s"
+                                repeatCount="indefinite"
+                            />
+                        </path>
+                        <path
+                            d="M 580 72 L 580 315 L 360 315"
+                            stroke="url(#pulseGradient)"
+                            strokeWidth="1.5"
+                            fill="none"
+                            className="text-primary/40"
+                        >
+                            <animate
+                                attributeName="stroke-dasharray"
+                                values="0,1000;1000,0"
+                                dur="2s"
+                                repeatCount="indefinite"
+                            />
+                        </path>
+                        <path
+                            d="M 580 528 L 580 335 L 360 335"
+                            stroke="url(#pulseGradient)"
+                            strokeWidth="1.5"
+                            fill="none"
+                            className="text-primary/40"
+                        >
+                            <animate
+                                attributeName="stroke-dasharray"
+                                values="0,1000;1000,0"
+                                dur="2s"
+                                repeatCount="indefinite"
+                            />
+                        </path>
+                        <path
+                            d="M 130 528 L 130 335 L 340 335"
+                            stroke="url(#pulseGradient)"
+                            strokeWidth="1.5"
+                            fill="none"
+                            className="text-primary/40"
+                        >
+                            <animate
+                                attributeName="stroke-dasharray"
+                                values="0,1000;1000,0"
+                                dur="2s"
+                                repeatCount="indefinite"
+                            />
+                        </path>
+                        <path
+                            d="M 352 0 L 352 315"
+                            stroke="url(#pulseGradient)"
+                            strokeWidth="1.5"
+                            fill="none"
+                            className="text-primary/40"
+                        >
+                            <animate
+                                attributeName="stroke-dasharray"
+                                values="0,1000;1000,0"
+                                dur="2s"
+                                repeatCount="indefinite"
+                            />
+                        </path>
+                        <path
+                            d="M 352 600 L 352 300"
+                            stroke="url(#pulseGradient)"
+                            strokeWidth="1.5"
+                            fill="none"
+                            className="text-primary/40"
+                        >
+                            <animate
+                                attributeName="stroke-dasharray"
+                                values="0,1000;1000,0"
+                                dur="2s"
+                                repeatCount="indefinite"
+                            />
+                        </path>
                     </svg>
 
                     {/* Top Component */}
@@ -165,7 +284,7 @@ export default function IsometricUISection() {
                         initial={{ opacity: 0, y: -100 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.5 }}
-                        className="absolute -top-24 left-[30%] -translate-x-1/2 z-40 w-64 shadow-xl rounded-xl"
+                        className="absolute -top-24 left-[30%] -translate-x-1/2 z-40 w-64"
                     >
                         <div className="relative">
                             <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
@@ -180,26 +299,49 @@ export default function IsometricUISection() {
                                         </linearGradient>
                                         <rect width="100%" height="100%" fill="url(#topFadeGradient)" rx="12" ry="12" />
                                     </mask>
+                                    <linearGradient id="topPulseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stopColor="currentColor" stopOpacity="0.1">
+                                            <animate attributeName="stop-opacity" values="0.1;0.4;0.1" dur="2s" repeatCount="indefinite" />
+                                        </stop>
+                                        <stop offset="50%" stopColor="currentColor" stopOpacity="0.4">
+                                            <animate attributeName="stop-opacity" values="0.4;0.1;0.4" dur="2s" repeatCount="indefinite" />
+                                        </stop>
+                                        <stop offset="100%" stopColor="currentColor" stopOpacity="0.1">
+                                            <animate attributeName="stop-opacity" values="0.1;0.4;0.1" dur="2s" repeatCount="indefinite" />
+                                        </stop>
+                                    </linearGradient>
                                 </defs>
                             </svg>
-                            <div className="p-4 bg-white dark:bg-black rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm" style={{ mask: 'url(#topFadeMask)' }}>
-                                <div className="flex items-center justify-between mb-4">
-                                    <div className="flex items-center space-x-2">
-                                        <FiLayers className="text-primary h-5 w-5" />
-                                        <h4 className="font-medium text-sm">Components</h4>
-                                    </div>
-                                    <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
-                                        New
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <div className="flex items-center justify-between text-sm">
-                                        <span>UI Sections</span>
-                                        <span className="text-black/60 dark:text-white/60">24</span>
-                                    </div>
-                                    <div className="flex items-center justify-between text-sm">
-                                        <span>Code Blocks</span>
-                                        <span className="text-black/60 dark:text-white/60">156</span>
+                            <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm" style={{ mask: 'url(#topFadeMask)' }}>
+                                <div className="relative">
+                                    <div 
+                                        className="absolute inset-0 rounded-xl opacity-50" 
+                                        style={{ 
+                                            background: 'linear-gradient(90deg, var(--primary) 0%, var(--primary) 50%, var(--primary) 100%)',
+                                            backgroundSize: '200% 100%',
+                                            animation: 'pulse 2s infinite'
+                                        }} 
+                                    />
+                                    <div className="relative z-10">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div className="flex items-center space-x-2">
+                                                <FiLayers className="text-primary h-5 w-5" />
+                                                <h4 className="font-medium text-sm">Components</h4>
+                                            </div>
+                                            <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
+                                                New
+                                            </div>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <div className="flex items-center justify-between text-sm">
+                                                <span>UI Sections</span>
+                                                <span className="text-black/60 dark:text-white/60">24</span>
+                                            </div>
+                                            <div className="flex items-center justify-between text-sm">
+                                                <span>Code Blocks</span>
+                                                <span className="text-black/60 dark:text-white/60">156</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -229,24 +371,36 @@ export default function IsometricUISection() {
                                     </mask>
                                 </defs>
                             </svg>
-                            <div className="p-4 bg-white dark:bg-black rounded-t-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/10 dark:border-white/10 backdrop-blur-sm" style={{ mask: 'url(#bottomFadeMask)' }}>
-                                <div className="flex items-center justify-between mb-2">
-                                    <div className="flex items-center space-x-2">
-                                        <FiTrendingUp className="text-primary h-5 w-5" />
-                                        <h4 className="font-medium text-sm">Statistics</h4>
-                                    </div>
-                                    <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
-                                        Live
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <div className="flex items-center justify-between text-sm">
-                                        <span>Active Users</span>
-                                        <span className="text-black/60 dark:text-white/60">1.2k</span>
-                                    </div>
-                                    <div className="flex items-center justify-between text-sm">
-                                        <span>Downloads</span>
-                                        <span className="text-black/60 dark:text-white/60">3.4k</span>
+                            <div className="p-4 bg-white dark:bg-[#111] rounded-t-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/10 dark:border-white/10 backdrop-blur-sm" style={{ mask: 'url(#bottomFadeMask)' }}>
+                                <div className="relative">
+                                    <div 
+                                        className="absolute inset-0 rounded-t-xl opacity-50" 
+                                        style={{ 
+                                            background: 'linear-gradient(90deg, var(--primary) 0%, var(--primary) 50%, var(--primary) 100%)',
+                                            backgroundSize: '200% 100%',
+                                            animation: 'pulse 2s infinite'
+                                        }} 
+                                    />
+                                    <div className="relative z-10">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <div className="flex items-center space-x-2">
+                                                <FiTrendingUp className="text-primary h-5 w-5" />
+                                                <h4 className="font-medium text-sm">Statistics</h4>
+                                            </div>
+                                            <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
+                                                Live
+                                            </div>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <div className="flex items-center justify-between text-sm">
+                                                <span>Active Users</span>
+                                                <span className="text-black/60 dark:text-white/60">1.2k</span>
+                                            </div>
+                                            <div className="flex items-center justify-between text-sm">
+                                                <span>Downloads</span>
+                                                <span className="text-black/60 dark:text-white/60">3.4k</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -266,7 +420,7 @@ export default function IsometricUISection() {
                         >
                             <div className="flex flex-col items-center justify-center gap-1">
                                 <div className="rounded-lg border border-text-primary/20 h-16 w-16 flex items-center justify-center">
-                                    <div className="bg-black dark:bg-white border rounded-lg h-14 w-14 flex items-center justify-center">
+                                    <div className="bg-[#111] dark:bg-white border rounded-lg h-14 w-14 flex items-center justify-center">
                                         <span className="text-3xl font-bold text-white dark:text-black">U</span>
                                     </div>
                                 </div>
@@ -282,7 +436,7 @@ export default function IsometricUISection() {
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="absolute top-10 left-0 z-40 w-64"
                     >
-                        <div className="p-4 bg-white dark:bg-black rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
+                        <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
                             <div className="flex justify-between items-center mb-4">
                                 <div className="flex items-center space-x-2">
                                     <div className="w-3 h-3 rounded-full bg-primary"></div>
@@ -335,35 +489,50 @@ export default function IsometricUISection() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="absolute top-10 right-0 z-40 w-80"
                     >
-                        <div className="p-4 bg-white dark:bg-black rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
+                        <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="flex items-center space-x-2">
                                     <FiCalendar className="text-primary h-5 w-5" />
                                     <h4 className="font-medium text-sm">Calendar</h4>
                                 </div>
-                                <div className="text-xs text-black/60 dark:text-white/60">May 2024</div>
+                                <div className="text-xs text-black/60 dark:text-white/60">{formatMonthYear(currentDate)}</div>
                             </div>
 
-                            <div className="grid grid-cols-7 gap-1 mb-2 text-center text-xs text-black/60 dark:text-white/60">
+                            <div className="grid grid-cols-7 gap-1 mb-2 text-center text-xxs text-black/60 dark:text-white/60">
                                 {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((day) => (
                                     <div key={day}>{day}</div>
                                 ))}
                             </div>
 
-                            <div className="grid grid-cols-7 gap-1 text-center text-xs">
-                                {Array.from({ length: 35 }, (_, i) => (
-                                    <div
-                                        key={i}
-                                        className={`p-1.5 rounded-full ${i === 18
-                                            ? 'bg-primary text-white'
-                                            : i > 28
-                                                ? 'text-black/40 dark:text-white/40'
-                                                : ''
+                            <div className="grid grid-cols-7 gap-1 text-center text-xxs">
+                                {Array.from({ length: 42 }, (_, i) => {
+                                    const firstDay = getFirstDayOfMonth(currentDate);
+                                    const daysInMonth = getDaysInMonth(currentDate);
+                                    const prevMonthDays = getDaysInMonth(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+                                    const dayNumber = i - firstDay + 1;
+                                    const isCurrentMonth = dayNumber > 0 && dayNumber <= daysInMonth;
+                                    const isToday = isCurrentMonth && dayNumber === currentDate.getDate();
+                                    const displayDay = isCurrentMonth 
+                                        ? dayNumber 
+                                        : dayNumber <= 0 
+                                            ? prevMonthDays + dayNumber 
+                                            : dayNumber - daysInMonth;
+
+                                    return (
+                                        <div
+                                            key={i}
+                                            className={`p-1.5 rounded-full ${
+                                                isToday
+                                                    ? 'bg-primary text-white dark:text-black'
+                                                    : isCurrentMonth
+                                                        ? 'text-black dark:text-white'
+                                                        : 'text-black/40 dark:text-white/40'
                                             }`}
-                                    >
-                                        {i + 1}
-                                    </div>
-                                ))}
+                                        >
+                                            {displayDay}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     </motion.div>
@@ -375,7 +544,7 @@ export default function IsometricUISection() {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="absolute bottom-10 right-0 z-40 w-72"
                     >
-                        <div className="p-4 bg-white dark:bg-black rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
+                        <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
                             <div className="flex items-center justify-between mb-4">
                                 <h4 className="font-medium text-sm">Analytics</h4>
                                 <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
@@ -387,7 +556,7 @@ export default function IsometricUISection() {
                                 {[30, 45, 25, 60, 40, 20, 75].map((height, i) => (
                                     <div
                                         key={i}
-                                        className="flex-1 bg-primary/20 dark:bg-primary/30 rounded-t transition-all duration-300 hover:bg-primary/30 dark:hover:bg-primary/40"
+                                        className="flex-1 bg-[#111] dark:bg-white rounded-t transition-all duration-300 hover:bg-primary/30 dark:hover:bg-primary/40"
                                         style={{ height: `${height}%` }}
                                     />
                                 ))}
@@ -410,7 +579,7 @@ export default function IsometricUISection() {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="absolute left-0 bottom-10 z-40 w-72"
                     >
-                        <div className="p-4 bg-white dark:bg-black rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
+                        <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="flex items-center space-x-2">
                                     <FiBell className="text-primary h-5 w-5" />
@@ -446,6 +615,20 @@ export default function IsometricUISection() {
             <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10"></div>
             <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
             <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
+
+            <style jsx>{`
+                @keyframes pulse {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+                    50% {
+                        background-position: 100% 50%;
+                    }
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+            `}</style>
         </section>
     );
 }

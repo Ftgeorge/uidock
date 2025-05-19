@@ -1,3 +1,4 @@
+import { ComponentsContent } from '@/components/features/components-content';
 import { MainLayout } from '@/components/layout/main-layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -45,30 +46,7 @@ function App() {
     title: 'Components',
     description: 'Browse our component library',
     icon: FiCode,
-    content: `
-# Component Library
-
-UIDOCK provides a wide range of pre-built components that you can use in your projects.
-
-## Available Components
-
-- Buttons
-- Cards
-- Forms
-- Navigation
-- Layout
-- Modals
-- And more...
-
-## Component Documentation
-
-Each component comes with detailed documentation, including:
-
-- Props
-- Examples
-- Best practices
-- Accessibility guidelines
-    `,
+    content: <ComponentsContent/>,
   },
   {
     id: 'contributing',
@@ -173,22 +151,9 @@ export default function DocumentationPage() {
                         <p className="text-muted-foreground">
                           {section.description}
                         </p>
-                        <div
-                          className="mt-6"
-                          dangerouslySetInnerHTML={{
-                            __html: section.content
-                              .split('\n')
-                              .map((line) => {
-                                if (line.startsWith('```')) {
-                                  return `<pre><code>${line
-                                    .replace('```', '')
-                                    .replace('```', '')}</code></pre>`;
-                                }
-                                return line;
-                              })
-                              .join('\n'),
-                          }}
-                        />
+                        <div className="mt-6">
+                        {section.content}
+                        </div>
                       </div>
                     </TabsContent>
                   ))}

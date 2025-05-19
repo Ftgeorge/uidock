@@ -62,6 +62,9 @@ const config = {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
       },
+      fontSize: {
+        'xxs': ['0.625rem', { lineHeight: '0.75rem' }], // 10px
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
