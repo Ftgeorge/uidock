@@ -109,18 +109,18 @@ export default function DocumentationPage() {
         <div className="grid gap-8 lg:grid-cols-4">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <Card>
+            <Card variant="bordered">
               <CardHeader>
                 <CardTitle>Documentation</CardTitle>
                 <CardDescription>Learn how to use UIDOCK</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className='mt-2'>
                 <nav className="space-y-2">
                   {documentationSections.map((section) => (
                     <Button
                       key={section.id}
                       variant="ghost"
-                      className="w-full justify-start"
+                      className="w-full justify-start px-0"
                     >
                       <section.icon className="mr-2 h-4 w-4" />
                       {section.title}
@@ -133,8 +133,8 @@ export default function DocumentationPage() {
 
           {/* Main Content */}
           <div className="lg:col-span-3">
-            <Card>
-              <CardContent className="pt-6">
+            <Card variant='bordered'>
+              <CardContent className="pt-2">
                 <Tabs defaultValue="getting-started">
                   <TabsList>
                     {documentationSections.map((section) => (
@@ -146,12 +146,12 @@ export default function DocumentationPage() {
                   </TabsList>
                   {documentationSections.map((section) => (
                     <TabsContent key={section.id} value={section.id}>
-                      <div className="prose prose-slate max-w-none">
+                      <div className="mt-4 prose prose-slate max-w-none">
                         <h1>{section.title}</h1>
                         <p className="text-muted-foreground">
                           {section.description}
                         </p>
-                        <div className="mt-6">
+                        <div className="mt-0">
                         {section.content}
                         </div>
                       </div>

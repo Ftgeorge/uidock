@@ -20,9 +20,9 @@ export function MainLayout({ children }: MainLayoutProps) {
   const { isSidebarOpen, toggleSidebar } = useUIStore();
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-light dark:bg-dark">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b bg-light dark:bg-dark backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center">
           <Button
             variant="ghost"

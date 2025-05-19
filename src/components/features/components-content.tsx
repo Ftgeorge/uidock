@@ -61,34 +61,9 @@ export function ComponentsContent() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden">
-        <div className="relative z-10">
-          {/* Stats Grid */}
-          <MotionDiv
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {stats.map((stat, index) => (
-              <Card key={stat.label} className="border-none bg-background/50 backdrop-blur">
-                <CardContent className="flex items-center gap-4 p-4">
-                  <div className="rounded-lg bg-primary/10 p-2">
-                    <stat.icon className="size-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xl font-bold">{stat.value}</p>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </MotionDiv>
-        </div>
-      </section>
 
       {/* Filters Section */}
-      <section className="sticky top-14 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <section className="sticky top-14 z-40 border-b bg-light dark:bg-dark backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="py-4">
           <div className="grid gap-4 md:grid-cols-3">
             <div className="relative">

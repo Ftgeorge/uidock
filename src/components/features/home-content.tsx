@@ -285,14 +285,13 @@ export function HomeContent() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/20">
+      <section className="relative overflow-hidden bg-light dark:bg-dark">
         {/* Background Elements */}
-
         <HeroWithIsometric />
       </section>
 
       {/* Code Blocks Grid */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-muted/20 to-background py-24">
+      <section className="relative overflow-hidden bg-light dark:bg-dark py-24">
         <div className="container relative z-10">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center mb-12">
             <MotionH1

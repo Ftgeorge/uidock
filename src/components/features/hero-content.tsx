@@ -7,6 +7,26 @@ import { useTheme } from "next-themes";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { MotionH1, MotionP, MotionDiv } from "../ui/motion";
+import { Card, CardHeader, CardContent } from "../ui/card";
+
+const CARD_ANIMATIONS = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.8 }
+};
+
+const SIDE_CARD_ANIMATIONS = {
+    initial: { opacity: 0, x: -100 },
+    animate: { opacity: 1, x: 0 },
+    transition: { duration: 0.6 }
+};
+
+const ANALYTICS_DATA = [30, 45, 25, 60, 40, 20, 75];
+
+const NOTIFICATIONS = [
+    { text: "New component added", time: "2 minutes ago" },
+    { text: "Update available", time: "1 hour ago" }
+];
 
 export default function IsometricUISection() {
     const [mounted, setMounted] = useState(false);
@@ -93,7 +113,7 @@ export default function IsometricUISection() {
                     <MotionH1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-center xl:text-left text-2xl font-bold sm:text-5xl md:text-4xl lg:text-4xl"
+                        className="text-center xl:text-left text-2xl font-bold sm:text-5xl md:text-4xl lg:text-4xl xl:text-3xl"
                     >
                         Build Beautiful
                         <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
@@ -115,25 +135,21 @@ export default function IsometricUISection() {
                         transition={{ delay: 0.4 }}
                         className="mt-8 flex flex-wrap items-center justify-center xl:justify-start gap-4 w-full"
                     >
-                        <Button asChild className="group">
-                            <Link href="/docs">
-                                Get Started
-                                <FiArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-                            </Link>
+                        <Button href="/docs" variant="default" className="group">
+                            Get Started
+                            <FiArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
                         </Button>
-                        <Button variant="ghost" asChild className="group">
-                            <Link href="/code-blocks">
-                                Explore Code Blocks
-                                <FiLayers className="ml-2 transition-transform group-hover:translate-x-1" />
-                            </Link>
+                        <Button href="/code-blocks" variant="ghost" asChild className="group">
+                            Explore Code Blocks
+                            <FiLayers className="ml-2 transition-transform group-hover:translate-x-1" />
                         </Button>
                     </MotionDiv>
                 </div>
 
 
-                {/* Flowchart-style Cards Layout */}
-                <div className="w-full lg:w-7/12 h-[610px] relative hidden xl:block overflow-visible">
-                    {/* Connecting Lines - Straight lines only */}
+                {/* Isometric Cards Layout */}
+                <div className="w-[800px] h-[610px] relative hidden xl:block overflow-visible">
+                    {/* Connecting Lines - Linear lines only */}
                     <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
                         <defs>
                             <linearGradient id="pulseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -284,7 +300,7 @@ export default function IsometricUISection() {
                         initial={{ opacity: 0, y: -100 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.5 }}
-                        className="absolute -top-24 left-[30%] -translate-x-1/2 z-40 w-64"
+                        className="absolute -top-24 left-[240px] z-40 w-64"
                     >
                         <div className="relative">
                             <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
@@ -312,21 +328,21 @@ export default function IsometricUISection() {
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm" style={{ mask: 'url(#topFadeMask)' }}>
+                            <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-light-200 dark:border-dark-200" style={{ mask: 'url(#topFadeMask)' }}>
                                 <div className="relative">
-                                    <div 
-                                        className="absolute inset-0 rounded-xl opacity-50" 
-                                        style={{ 
+                                    <div
+                                        className="absolute inset-0 rounded-xl opacity-50"
+                                        style={{
                                             background: 'linear-gradient(90deg, var(--primary) 0%, var(--primary) 50%, var(--primary) 100%)',
                                             backgroundSize: '200% 100%',
                                             animation: 'pulse 2s infinite'
-                                        }} 
+                                        }}
                                     />
                                     <div className="relative z-10">
                                         <div className="flex items-center justify-between mb-4">
                                             <div className="flex items-center space-x-2">
                                                 <FiLayers className="text-primary h-5 w-5" />
-                                                <h4 className="font-medium text-sm">Components</h4>
+                                                <h4 className="font-medium text-sm text-dark dark:text-light">Components</h4>
                                             </div>
                                             <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
                                                 New
@@ -334,12 +350,12 @@ export default function IsometricUISection() {
                                         </div>
                                         <div className="space-y-2">
                                             <div className="flex items-center justify-between text-sm">
-                                                <span>UI Sections</span>
-                                                <span className="text-black/60 dark:text-white/60">24</span>
+                                                <span className="text-dark dark:text-light">UI Sections</span>
+                                                <span className="text-dark-600 dark:text-light-600">24</span>
                                             </div>
                                             <div className="flex items-center justify-between text-sm">
-                                                <span>Code Blocks</span>
-                                                <span className="text-black/60 dark:text-white/60">156</span>
+                                                <span className="text-dark dark:text-light">Code Blocks</span>
+                                                <span className="text-dark-600 dark:text-light-600">156</span>
                                             </div>
                                         </div>
                                     </div>
@@ -353,7 +369,7 @@ export default function IsometricUISection() {
                         initial={{ opacity: 0, y: 100 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="absolute -bottom-24 left-[30%] -translate-x-1/2 z-40 w-64"
+                        className="absolute -bottom-24 left-[240px] z-40 w-64"
                     >
                         <div className="relative">
                             <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
@@ -369,23 +385,34 @@ export default function IsometricUISection() {
                                         </linearGradient>
                                         <rect width="100%" height="100%" fill="url(#bottomFadeGradient)" />
                                     </mask>
+                                    <linearGradient id="bottomPulseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stopColor="currentColor" stopOpacity="0.1">
+                                            <animate attributeName="stop-opacity" values="0.1;0.4;0.1" dur="2s" repeatCount="indefinite" />
+                                        </stop>
+                                        <stop offset="50%" stopColor="currentColor" stopOpacity="0.4">
+                                            <animate attributeName="stop-opacity" values="0.4;0.1;0.4" dur="2s" repeatCount="indefinite" />
+                                        </stop>
+                                        <stop offset="100%" stopColor="currentColor" stopOpacity="0.1">
+                                            <animate attributeName="stop-opacity" values="0.1;0.4;0.1" dur="2s" repeatCount="indefinite" />
+                                        </stop>
+                                    </linearGradient>
                                 </defs>
                             </svg>
-                            <div className="p-4 bg-white dark:bg-[#111] rounded-t-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/10 dark:border-white/10 backdrop-blur-sm" style={{ mask: 'url(#bottomFadeMask)' }}>
+                            <div className="p-4 bg-white dark:bg-[#111] rounded-t-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-light-200 dark:border-dark-200" style={{ mask: 'url(#bottomFadeMask)' }}>
                                 <div className="relative">
-                                    <div 
-                                        className="absolute inset-0 rounded-t-xl opacity-50" 
-                                        style={{ 
+                                    <div
+                                        className="absolute inset-0 rounded-t-xl opacity-50"
+                                        style={{
                                             background: 'linear-gradient(90deg, var(--primary) 0%, var(--primary) 50%, var(--primary) 100%)',
                                             backgroundSize: '200% 100%',
                                             animation: 'pulse 2s infinite'
-                                        }} 
+                                        }}
                                     />
                                     <div className="relative z-10">
                                         <div className="flex items-center justify-between mb-2">
                                             <div className="flex items-center space-x-2">
                                                 <FiTrendingUp className="text-primary h-5 w-5" />
-                                                <h4 className="font-medium text-sm">Statistics</h4>
+                                                <h4 className="font-medium text-sm text-dark dark:text-light">Statistics</h4>
                                             </div>
                                             <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
                                                 Live
@@ -393,12 +420,12 @@ export default function IsometricUISection() {
                                         </div>
                                         <div className="space-y-2">
                                             <div className="flex items-center justify-between text-sm">
-                                                <span>Active Users</span>
-                                                <span className="text-black/60 dark:text-white/60">1.2k</span>
+                                                <span className="text-dark dark:text-light">Active Users</span>
+                                                <span className="text-dark-600 dark:text-light-600">1.2k</span>
                                             </div>
                                             <div className="flex items-center justify-between text-sm">
-                                                <span>Downloads</span>
-                                                <span className="text-black/60 dark:text-white/60">3.4k</span>
+                                                <span className="text-dark dark:text-light">Downloads</span>
+                                                <span className="text-dark-600 dark:text-light-600">3.4k</span>
                                             </div>
                                         </div>
                                     </div>
@@ -416,11 +443,11 @@ export default function IsometricUISection() {
                                 duration: 0.5,
                                 ease: [0, 0.71, 0.2, 1.01],
                             }}
-                            className="absolute top-[48%] left-[42%] -translate-x-1/2 -translate-y-1/2 z-50"
+                            className="absolute top-[48%] left-[315px] -translate-y-1/2 z-50"
                         >
                             <div className="flex flex-col items-center justify-center gap-1">
-                                <div className="rounded-lg border border-text-primary/20 h-16 w-16 flex items-center justify-center">
-                                    <div className="bg-[#111] dark:bg-white border rounded-lg h-14 w-14 flex items-center justify-center">
+                                <div className="rounded-lg bg-light dark:bg-dark border border-text-primary/20 h-16 w-16 flex items-center justify-center">
+                                    <div className="bg-dark dark:bg-light border rounded-lg h-14 w-14 flex items-center justify-center">
                                         <span className="text-3xl font-bold text-white dark:text-black">U</span>
                                     </div>
                                 </div>
@@ -429,183 +456,169 @@ export default function IsometricUISection() {
                         </MotionDiv>
                     </div>
 
-                    {/* Theme Toggle Card - Top Left */}
+                    {/* Theme Toggle Card */}
                     <motion.div
-                        initial={{ opacity: 0, x: -100 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
+                        {...SIDE_CARD_ANIMATIONS}
+                        transition={{ ...SIDE_CARD_ANIMATIONS.transition, delay: 0.1 }}
                         className="absolute top-10 left-0 z-40 w-64"
                     >
-                        <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
-                            <div className="flex justify-between items-center mb-4">
-                                <div className="flex items-center space-x-2">
-                                    <div className="w-3 h-3 rounded-full bg-primary"></div>
-                                    <span className="font-medium text-sm">Theme Settings</span>
+                        <Card variant="bordered" className="shadow-2xl">
+                            <CardHeader>
+                                <div className="flex justify-between items-center">
+                                    <div className="flex items-center space-x-2">
+                                        <div className="w-3 h-3 rounded-full bg-primary"></div>
+                                        <span className="font-medium text-sm text-dark dark:text-light">Theme Settings</span>
+                                    </div>
+                                    <div className="text-xs text-dark-600 dark:text-light-600">System</div>
                                 </div>
-                                <div className="text-xs text-black/60 dark:text-white/60">System</div>
-                            </div>
-
-                            <div className="flex flex-col space-y-2">
-                                <button
-                                    onClick={() => setTheme('light')}
-                                    className={`p-2 rounded-lg flex items-center space-x-3 transition-all duration-200 ${theme === 'light'
-                                        ? 'bg-primary text-white dark:text-black shadow-lg scale-105'
-                                        : 'hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white'
-                                        }`}
-                                >
-                                    <FiSun className="h-5 w-5" />
-                                    <span className="text-sm font-medium">Light Mode</span>
-                                </button>
-
-                                <button
-                                    onClick={() => setTheme('dark')}
-                                    className={`p-3 rounded-lg flex items-center space-x-3 transition-all duration-200 ${theme === 'dark'
-                                        ? 'bg-primary text-white dark:text-black shadow-lg scale-105'
-                                        : 'hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white'
-                                        }`}
-                                >
-                                    <FiMoon className="h-5 w-5" />
-                                    <span className="text-sm font-medium">Dark Mode</span>
-                                </button>
-
-                                <button
-                                    onClick={() => setTheme('system')}
-                                    className={`p-3 rounded-lg flex items-center space-x-3 transition-all duration-200 ${theme === 'system'
-                                        ? 'bg-primary text-white dark:text-black shadow-lg scale-105'
-                                        : 'hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white'
-                                        }`}
-                                >
-                                    <FiGrid className="h-5 w-5" />
-                                    <span className="text-sm font-medium">System Default</span>
-                                </button>
-                            </div>
-                        </div>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="flex flex-col space-y-2">
+                                    {[
+                                        { icon: FiSun, label: 'Light Mode', value: 'light' },
+                                        { icon: FiMoon, label: 'Dark Mode', value: 'dark' },
+                                        { icon: FiGrid, label: 'System Default', value: 'system' }
+                                    ].map(({ icon: Icon, label, value }) => (
+                                        <Button
+                                            key={value}
+                                            onClick={() => setTheme(value)}
+                                            variant={theme === value ? "default" : "ghost"}
+                                            className="justify-start"
+                                        >
+                                            <Icon className="h-5 w-5 mr-3" />
+                                            <span className="text-sm font-medium">{label}</span>
+                                        </Button>
+                                    ))}
+                                </div>
+                            </CardContent>
+                        </Card>
                     </motion.div>
 
-                    {/* Calendar Card - Top Right */}
+                    {/* Calendar Card */}
                     <motion.div
-                        initial={{ opacity: 0, x: 100 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                        {...SIDE_CARD_ANIMATIONS}
+                        transition={{ ...SIDE_CARD_ANIMATIONS.transition, delay: 0.2 }}
                         className="absolute top-10 right-0 z-40 w-80"
                     >
-                        <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
-                            <div className="flex items-center justify-between mb-4">
-                                <div className="flex items-center space-x-2">
-                                    <FiCalendar className="text-primary h-5 w-5" />
-                                    <h4 className="font-medium text-sm">Calendar</h4>
+                        <Card variant="bordered" className="shadow-2xl">
+                            <CardHeader>
+                                <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center space-x-2">
+                                        <FiCalendar className="text-primary h-5 w-5" />
+                                        <h4 className="font-medium text-sm text-dark dark:text-light">Calendar</h4>
+                                    </div>
+                                    <div className="text-xxs text-dark-600 dark:text-light-600">{formatMonthYear(currentDate)}</div>
                                 </div>
-                                <div className="text-xs text-black/60 dark:text-white/60">{formatMonthYear(currentDate)}</div>
-                            </div>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="grid grid-cols-7 gap-1 mb-2 text-center text-xxs text-dark-600 dark:text-light-600">
+                                    {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((day) => (
+                                        <div key={day}>{day}</div>
+                                    ))}
+                                </div>
 
-                            <div className="grid grid-cols-7 gap-1 mb-2 text-center text-xxs text-black/60 dark:text-white/60">
-                                {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((day) => (
-                                    <div key={day}>{day}</div>
-                                ))}
-                            </div>
+                                <div className="grid grid-cols-7 gap-1 text-center text-xxs">
+                                    {Array.from({ length: 42 }, (_, i) => {
+                                        const firstDay = getFirstDayOfMonth(currentDate);
+                                        const daysInMonth = getDaysInMonth(currentDate);
+                                        const prevMonthDays = getDaysInMonth(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+                                        const dayNumber = i - firstDay + 1;
+                                        const isCurrentMonth = dayNumber > 0 && dayNumber <= daysInMonth;
+                                        const isToday = isCurrentMonth && dayNumber === currentDate.getDate();
+                                        const displayDay = isCurrentMonth
+                                            ? dayNumber
+                                            : dayNumber <= 0
+                                                ? prevMonthDays + dayNumber
+                                                : dayNumber - daysInMonth;
 
-                            <div className="grid grid-cols-7 gap-1 text-center text-xxs">
-                                {Array.from({ length: 42 }, (_, i) => {
-                                    const firstDay = getFirstDayOfMonth(currentDate);
-                                    const daysInMonth = getDaysInMonth(currentDate);
-                                    const prevMonthDays = getDaysInMonth(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
-                                    const dayNumber = i - firstDay + 1;
-                                    const isCurrentMonth = dayNumber > 0 && dayNumber <= daysInMonth;
-                                    const isToday = isCurrentMonth && dayNumber === currentDate.getDate();
-                                    const displayDay = isCurrentMonth 
-                                        ? dayNumber 
-                                        : dayNumber <= 0 
-                                            ? prevMonthDays + dayNumber 
-                                            : dayNumber - daysInMonth;
-
-                                    return (
-                                        <div
-                                            key={i}
-                                            className={`p-1.5 rounded-full ${
-                                                isToday
+                                        return (
+                                            <div
+                                                key={i}
+                                                className={`p-1.5 rounded-full ${isToday
                                                     ? 'bg-primary text-white dark:text-black'
                                                     : isCurrentMonth
                                                         ? 'text-black dark:text-white'
                                                         : 'text-black/40 dark:text-white/40'
-                                            }`}
-                                        >
-                                            {displayDay}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
+                                                    }`}
+                                            >
+                                                {displayDay}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </CardContent>
+                        </Card>
                     </motion.div>
 
-                    {/* Analytics Card - Bottom Right */}
+                    {/* Analytics Card */}
                     <motion.div
-                        initial={{ opacity: 0, y: 100 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
+                        {...CARD_ANIMATIONS}
+                        transition={{ ...CARD_ANIMATIONS.transition, delay: 0.3 }}
                         className="absolute bottom-10 right-0 z-40 w-72"
                     >
-                        <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
-                            <div className="flex items-center justify-between mb-4">
-                                <h4 className="font-medium text-sm">Analytics</h4>
-                                <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
-                                    +12.5%
+                        <Card className="shadow-2xl" variant="bordered">
+                            <CardHeader>
+                                <div className="flex items-center justify-between">
+                                    <h4 className="font-medium text-sm text-dark dark:text-light">Analytics</h4>
+                                    <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
+                                        +12.5%
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div className="flex items-end space-x-1 h-24 mb-2">
-                                {[30, 45, 25, 60, 40, 20, 75].map((height, i) => (
-                                    <div
-                                        key={i}
-                                        className="flex-1 bg-[#111] dark:bg-white rounded-t transition-all duration-300 hover:bg-primary/30 dark:hover:bg-primary/40"
-                                        style={{ height: `${height}%` }}
-                                    />
-                                ))}
-                            </div>
-
-                            <div className="flex items-center justify-between text-xs text-black/60 dark:text-white/60">
-                                <span>This Week</span>
-                                <div className="flex items-center">
-                                    <FiTrendingUp className="text-primary mr-1 h-3 w-3" />
-                                    <span>Growth Trend</span>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="flex items-end space-x-1 h-24 mb-2">
+                                    {ANALYTICS_DATA.map((height, i) => (
+                                        <div
+                                            key={i}
+                                            className="flex-1 bg-dark dark:bg-light rounded-t transition-all duration-300 hover:bg-primary/30 dark:hover:bg-primary/40"
+                                            style={{ height: `${height}%` }}
+                                        />
+                                    ))}
                                 </div>
-                            </div>
-                        </div>
+
+                                <div className="flex items-center justify-between text-xs text-dark-600 dark:text-light-600">
+                                    <span>This Week</span>
+                                    <div className="flex items-center">
+                                        <FiTrendingUp className="text-primary mr-1 h-3 w-3" />
+                                        <span>Growth Trend</span>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </motion.div>
 
-                    {/* Notification Card - Bottom Left */}
+                    {/* Notification Card */}
                     <motion.div
-                        initial={{ opacity: 0, x: -100 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
+                        {...SIDE_CARD_ANIMATIONS}
+                        transition={{ ...SIDE_CARD_ANIMATIONS.transition, delay: 0.4 }}
                         className="absolute left-0 bottom-10 z-40 w-72"
                     >
-                        <div className="p-4 bg-white dark:bg-[#111] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 backdrop-blur-sm">
-                            <div className="flex items-center justify-between mb-4">
-                                <div className="flex items-center space-x-2">
-                                    <FiBell className="text-primary h-5 w-5" />
-                                    <h4 className="font-medium text-sm">Notifications</h4>
-                                </div>
-                                <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
-                                    3 New
-                                </div>
-                            </div>
-                            <div className="space-y-3">
-                                <div className="flex items-start space-x-3">
-                                    <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
-                                    <div>
-                                        <p className="text-sm">New component added</p>
-                                        <p className="text-xs text-black/60 dark:text-white/60">2 minutes ago</p>
+                        <Card variant="bordered" className="shadow-2xl">
+                            <CardHeader>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center space-x-2">
+                                        <FiBell className="text-primary h-5 w-5" />
+                                        <h4 className="font-medium text-sm text-dark dark:text-light">Notifications</h4>
+                                    </div>
+                                    <div className="px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-medium">
+                                        3 New
                                     </div>
                                 </div>
-                                <div className="flex items-start space-x-3">
-                                    <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
-                                    <div>
-                                        <p className="text-sm">Update available</p>
-                                        <p className="text-xs text-black/60 dark:text-white/60">1 hour ago</p>
-                                    </div>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-3">
+                                    {NOTIFICATIONS.map((notification, index) => (
+                                        <div key={index} className="flex items-start space-x-3">
+                                            <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                                            <div>
+                                                <p className="text-sm text-dark dark:text-light">{notification.text}</p>
+                                                <p className="text-xs text-dark-600 dark:text-light-600">{notification.time}</p>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                            </div>
-                        </div>
+                            </CardContent>
+                        </Card>
                     </motion.div>
 
                 </div>
