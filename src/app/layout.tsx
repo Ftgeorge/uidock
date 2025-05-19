@@ -1,5 +1,4 @@
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import { Roboto } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
@@ -8,8 +7,11 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { SplashProvider } from '@/components/providers/splash-provider'
 import './globals.css'
 
-const fontSans = GeistSans
-const fontMono = GeistMono
+const roboto = Roboto({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata = {
   title: 'UIDOCK - Share and Discover UI Components',
@@ -26,8 +28,7 @@ export default function RootLayout({
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
-          fontSans.variable,
-          fontMono.variable
+          roboto.className
         )}
       >
         <ThemeProvider

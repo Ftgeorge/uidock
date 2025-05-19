@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { MotionDiv, MotionH1, MotionP } from '@/components/ui/motion'
-import { FiStar, FiDownload, FiEye, FiCode, FiCopy, FiGithub, FiExternalLink, FiHeart, FiShare2 } from 'react-icons/fi'
+import { FiStar, FiDownload, FiEye, FiCode, FiCopy, FiGithub, FiExternalLink, FiHeart, FiShare2, FiArrowLeft } from 'react-icons/fi'
 import { useState } from 'react'
+import Link from 'next/link'
 
 // Placeholder data - replace with actual data fetching
 const componentData = {
@@ -69,6 +70,20 @@ export default function ComponentDetailPage() {
           </div>
 
           <div className="container relative z-10">
+            {/* Back Button */}
+            <MotionDiv
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="mb-8"
+            >
+              <Button asChild variant="ghost" className="group">
+                <Link href="/components">
+                  <FiArrowLeft className="mr-2 transition-transform group-hover:-translate-x-1" />
+                  Back to Components
+                </Link>
+              </Button>
+            </MotionDiv>
+
             <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

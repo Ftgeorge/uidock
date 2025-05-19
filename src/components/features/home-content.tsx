@@ -4,98 +4,156 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { MotionDiv, MotionH1, MotionP } from '@/components/ui/motion'
 import Link from 'next/link'
-import { FiArrowRight, FiStar, FiClock, FiTrendingUp, FiCode, FiDownload, FiUsers, FiGithub, FiCheck, FiZap, FiLayers, FiShield, FiHeart, FiMessageSquare, FiAward } from 'react-icons/fi'
+import { FiArrowRight, FiCode, FiGithub, FiTwitter, FiLinkedin, FiYoutube, FiHeart, FiDownload, FiEye, FiLayers } from 'react-icons/fi'
+import HeroWithIsometric from './hero-content'
 
 // Placeholder data - replace with actual data fetching
-const featuredComponents = [
+const codeBlocks = [
   {
     id: '1',
     title: 'Animated Button',
-    description: 'A beautiful button component with hover and click animations',
+    description: 'A beautiful button with hover and click animations',
+    code: `import { Button } from "@/components/ui/button"
+
+export function AnimatedButton() {
+  t
+}`,
     author: 'John Doe',
-    image: '/placeholder.jpg',
     stars: 1234,
     downloads: 5678,
-    tags: ['Animation', 'Interactive', 'Modern'],
+    tags: ['Animation', 'Interactive'],
   },
   {
     id: '2',
     title: 'Card Grid',
     description: 'Responsive card grid layout with masonry effect',
+    code: `import { Card } from "@/components/ui/card"
+
+export function CardGrid() {
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      <Card>Card 3</Card>
+    </div>
+  )
+}`,
     author: 'Jane Smith',
-    image: '/placeholder.jpg',
     stars: 856,
     downloads: 2345,
-    tags: ['Layout', 'Responsive', 'Grid'],
+    tags: ['Layout', 'Responsive', 'Grid', 'Modern', 'UI'],
   },
   {
     id: '3',
     title: 'Neon Form',
-    description: 'Futuristic form component with neon glow effects',
+    description: 'Futuristic form with neon glow effects',
+    code: `import { Input } from "@/components/ui/input"
+
+export function NeonForm() {
+  return (
+    <form className="space-y-4">
+      <Input className="neon-glow" />
+    </form>
+  )
+}`,
     author: 'Alex Johnson',
-    image: '/placeholder.jpg',
     stars: 2345,
     downloads: 7890,
-    tags: ['Form', 'Neon', 'Modern'],
+    tags: ['Form', 'Neon'],
+  },
+  {
+    id: '4',
+    title: 'Animated Modal',
+    description: 'Smooth modal with backdrop blur',
+    code: `import { Dialog } from "@/components/ui/dialog"
+
+export function AnimatedModal() {
+  return (
+    <Dialog>
+      <DialogContent>Content</DialogContent>
+    </Dialog>
+  )
+}`,
+    author: 'Sarah Chen',
+    stars: 987,
+    downloads: 3456,
+    tags: ['Modal', 'Animation'],
+  },
+  {
+    id: '5',
+    title: 'Gradient Card',
+    description: 'Beautiful card with gradient background',
+    code: `import { Card } from "@/components/ui/card"
+
+export function GradientCard() {
+  return (
+    <Card className="bg-gradient-to-r from-primary to-secondary">
+      Content
+    </Card>
+  )
+}`,
+    author: 'Mike Wilson',
+    stars: 765,
+    downloads: 2345,
+    tags: ['Card', 'Gradient'],
+  },
+  {
+    id: '6',
+    title: 'Animated Navbar',
+    description: 'Responsive navbar with smooth animations',
+    code: `import { NavigationMenu } from "@/components/ui/navigation-menu"
+
+export function AnimatedNavbar() {
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>Home</NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  )
+}`,
+    author: 'Emma Davis',
+    stars: 543,
+    downloads: 1234,
+    tags: ['Navbar', 'Animation'],
+  },
+  {
+    id: '7',
+    title: 'Loading Spinner',
+    description: 'Simple loading spinner component',
+    code: `export function Spinner() {
+  return (
+    <div className="animate-spin">
+      Loading...
+    </div>
+  )
+}`,
+    author: 'Tom Brown',
+    stars: 432,
+    downloads: 987,
+    tags: ['Loading', 'Animation'],
+  },
+  {
+    id: '8',
+    title: 'Toast Notification',
+    description: 'Elegant toast notification system',
+    code: `import { Toast } from "@/components/ui/toast"
+
+export function ToastDemo() {
+  return (
+    <Toast>Hello World</Toast>
+  )
+}`,
+    author: 'Lisa Wang',
+    stars: 876,
+    downloads: 2345,
+    tags: ['Toast', 'Notification'],
   },
 ]
 
-const stats = [
-  { label: 'Components', value: '10K+', icon: FiCode },
-  { label: 'Downloads', value: '1M+', icon: FiDownload },
-  { label: 'Developers', value: '50K+', icon: FiUsers },
-  { label: 'Stars', value: '25K+', icon: FiGithub },
-]
-
-const features = [
-  {
-    title: 'Modern Design',
-    description: 'Beautiful, accessible, and customizable components',
-    icon: FiLayers,
-  },
-  {
-    title: 'Fast Performance',
-    description: 'Optimized for speed and efficiency',
-    icon: FiZap,
-  },
-  {
-    title: 'Secure & Reliable',
-    description: 'Built with security and reliability in mind',
-    icon: FiShield,
-  },
-  {
-    title: 'Active Community',
-    description: 'Join thousands of developers and designers',
-    icon: FiUsers,
-  },
-]
-
-const testimonials = [
-  {
-    content: "UIDOCK has transformed how we build our applications. The components are beautiful and easy to customize.",
-    author: "Sarah Chen",
-    role: "Lead Developer at TechCorp",
-    avatar: "/avatars/sarah.jpg",
-  },
-  {
-    content: "The quality of components here is outstanding. It's become an essential part of our development workflow.",
-    author: "Michael Rodriguez",
-    role: "Frontend Architect",
-    avatar: "/avatars/michael.jpg",
-  },
-  {
-    content: "I love how easy it is to find and implement these components. The documentation is clear and comprehensive.",
-    author: "Emma Thompson",
-    role: "UI/UX Designer",
-    avatar: "/avatars/emma.jpg",
-  },
-]
-
-const communityStats = [
-  { label: 'Discussions', value: '25K+', icon: FiMessageSquare },
-  { label: 'Contributors', value: '5K+', icon: FiUsers },
-  { label: 'Awards', value: '100+', icon: FiAward },
-  { label: 'Stars', value: '25K+', icon: FiHeart },
+const socialLinks = [
+  { icon: FiGithub, href: "https://github.com", label: "GitHub" },
+  { icon: FiTwitter, href: "https://twitter.com", label: "Twitter" },
+  { icon: FiLinkedin, href: "https://linkedin.com", label: "LinkedIn" },
+  { icon: FiYoutube, href: "https://youtube.com", label: "YouTube" },
 ]
 
 const containerVariants = {
@@ -116,93 +174,134 @@ const itemVariants = {
   },
 }
 
+const cardVariants = {
+  initial: {
+    opacity: 0,
+    y: 20
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
+
+const codeBlockVariants = {
+  initial: {
+    opacity: 0,
+    scale: 0.95
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
+
+const tagVariants = {
+  initial: {
+    opacity: 0,
+    x: -10
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
+
+const floatingAnimation = {
+  animate: {
+    y: [0, -8, 0],
+    transition: {
+      duration: 4,
+      ease: "easeInOut",
+      repeat: Infinity,
+      repeatType: "reverse"
+    }
+  }
+}
+
+const shimmerAnimation = {
+  animate: {
+    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+    transition: {
+      duration: 8,
+      ease: "linear",
+      repeat: Infinity
+    }
+  }
+}
+
+const columnAVariants = {
+  initial: { y: 0 },
+  animate: {
+    y: [0, -20, 0],
+    transition: {
+      duration: 6,
+      ease: "easeInOut",
+      repeat: Infinity,
+      repeatType: "reverse" as const
+    }
+  }
+}
+
+const columnBVariants = {
+  initial: { y: 0 },
+  animate: {
+    y: [0, 20, 0],
+    transition: {
+      duration: 6,
+      ease: "easeInOut",
+      repeat: Infinity,
+      repeatType: "reverse" as const
+    }
+  }
+}
+
+const columnCVariants = {
+  initial: { y: 0 },
+  animate: {
+    y: [0, -20, 0],
+    transition: {
+      duration: 6,
+      ease: "easeInOut",
+      repeat: Infinity,
+      repeatType: "reverse" as const
+    }
+  }
+}
+
 export function HomeContent() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] overflow-hidden bg-gradient-to-b from-background to-muted/20">
+      <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/20">
         {/* Background Elements */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-        </div>
 
-        <div className="container relative z-10 flex min-h-[90vh] flex-col items-center justify-center">
-          <MotionH1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl"
-          >
-            Share and Discover
-            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-              {" "}Beautiful UI Components
-            </span>
-          </MotionH1>
-          <MotionP
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mx-auto mt-6 max-w-2xl text-center text-lg text-muted-foreground"
-          >
-            Join our community of developers and designers to share, discover, and
-            collaborate on the best UI components.
-          </MotionP>
-          <MotionDiv
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-4"
-          >
-            <Button asChild className="group">
-              <Link href="/components">
-                Browse Components
-                <FiArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="group">
-              <Link href="/publish">
-                Publish Component
-                <FiArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-          </MotionDiv>
-
-          {/* Stats Grid */}
-          <MotionDiv
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="mt-16 grid w-full max-w-4xl gap-6 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {stats.map((stat) => (
-              <Card key={stat.label} className="border-none bg-background/50 backdrop-blur">
-                <CardContent className="flex items-center space-x-4 p-6">
-                  <div className="rounded-lg bg-primary/10 p-3">
-                    <stat.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">{stat.value}</p>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </MotionDiv>
-        </div>
+        <HeroWithIsometric />
       </section>
 
-      {/* Features Section */}
+      {/* Code Blocks Grid */}
       <section className="relative overflow-hidden bg-gradient-to-b from-muted/20 to-background py-24">
         <div className="container relative z-10">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+          <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center mb-12">
             <MotionH1
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-6xl"
+              className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-4xl bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent"
             >
-              Why Choose UIDOCK?
+              Featured Code Blocks
             </MotionH1>
             <MotionP
               initial={{ opacity: 0, y: 20 }}
@@ -211,58 +310,7 @@ export function HomeContent() {
               transition={{ delay: 0.2 }}
               className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
             >
-              Everything you need to build beautiful and functional user interfaces
-            </MotionP>
-          </div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature, index) => (
-              <MotionDiv
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="group h-full overflow-hidden transition-all hover:shadow-lg">
-                  <CardHeader>
-                    <div className="rounded-lg bg-primary/10 p-3 w-fit">
-                      <feature.icon className="h-8 w-8 text-primary" />
-                    </div>
-                    <CardTitle className="mt-4">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      {feature.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </MotionDiv>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Components */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/20 py-24">
-        <div className="container relative z-10">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-            <MotionH1
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-6xl"
-            >
-              Featured Components
-            </MotionH1>
-            <MotionP
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-            >
-              Discover our most popular and recently added UI components
+              Discover our most popular and recently added code blocks
             </MotionP>
           </div>
 
@@ -271,248 +319,271 @@ export function HomeContent() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {featuredComponents.map((component) => (
-              <MotionDiv key={component.id} variants={itemVariants}>
-                <Card className="group h-full overflow-hidden transition-all hover:shadow-lg">
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="group-hover:text-primary">
-                        {component.title}
-                      </CardTitle>
-                      <div className="flex items-center space-x-2">
-                        <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">
-                          Featured
-                        </span>
+            {/* Column 1 - 3 cards */}
+            <MotionDiv
+              variants={columnAVariants}
+              animate="animate"
+              className="flex flex-col gap-6"
+            >
+              {codeBlocks.slice(0, 3).map((block, index) => (
+                <MotionDiv
+                  key={block.id}
+                  variants={cardVariants}
+                  initial="initial"
+                  animate="animate"
+                  transition={{ delay: index * 0.3 }}
+                >
+                  <Card className="group overflow-hidden transition-all">
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <CardTitle>
+                          {block.title}
+                        </CardTitle>
+                        <div className="flex items-center space-x-2">
+                          <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">
+                            Featured
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <CardDescription>By {component.author}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-4 text-sm text-muted-foreground">
-                      {component.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {component.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center space-x-4">
-                        <span className="flex items-center">
-                          <FiStar className="mr-1" /> {component.stars}
-                        </span>
-                        <span className="flex items-center">
-                          <FiDownload className="mr-1" /> {component.downloads}
-                        </span>
+                      <CardDescription>By {block.author}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="mb-4 text-sm text-muted-foreground">
+                        {block.description}
+                      </p>
+                      <div className="mb-4 rounded-lg bg-muted/50 backdrop-blur-sm p-4">
+                        <pre className="overflow-x-auto">
+                          <code className="text-sm text-muted-foreground">{block.code}</code>
+                        </pre>
                       </div>
-                      <Button className="group-hover:text-primary">
-                        View Details
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </MotionDiv>
-            ))}
+                      <div className="flex flex-wrap gap-2">
+                        {block.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-muted/50 backdrop-blur-sm px-2 py-1 text-xs text-muted-foreground"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
+                        <div className="flex items-center space-x-4">
+                          <span className="flex items-center">
+                            <FiHeart className="mr-1" /> {block.stars}
+                          </span>
+                          <span className="flex items-center">
+                            <FiDownload className="mr-1" /> {block.downloads}
+                          </span>
+                        </div>
+                        <Button asChild>
+                          <Link href={`/code-blocks/${block.id}`}>
+                            View Details
+                          </Link>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </MotionDiv>
+              ))}
+            </MotionDiv>
+
+            {/* Column 2 - 2 cards */}
+            <MotionDiv
+              variants={columnBVariants}
+              animate="animate"
+              className="flex flex-col gap-6"
+            >
+              {codeBlocks.slice(3, 5).map((block, index) => (
+                <MotionDiv
+                  key={block.id}
+                  variants={cardVariants}
+                  initial="initial"
+                  animate="animate"
+                  transition={{ delay: index * 0.3 }}
+                >
+                  <Card className="group overflow-hidden transition-all">
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <CardTitle>
+                          {block.title}
+                        </CardTitle>
+                        <div className="flex items-center space-x-2">
+                          <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">
+                            Featured
+                          </span>
+                        </div>
+                      </div>
+                      <CardDescription>By {block.author}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="mb-4 text-sm text-muted-foreground">
+                        {block.description}
+                      </p>
+                      <div className="mb-4 rounded-lg bg-muted/50 backdrop-blur-sm p-4">
+                        <pre className="overflow-x-auto">
+                          <code className="text-sm text-muted-foreground">{block.code}</code>
+                        </pre>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {block.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-muted/50 backdrop-blur-sm px-2 py-1 text-xs text-muted-foreground"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
+                        <div className="flex items-center space-x-4">
+                          <span className="flex items-center">
+                            <FiHeart className="mr-1" /> {block.stars}
+                          </span>
+                          <span className="flex items-center">
+                            <FiDownload className="mr-1" /> {block.downloads}
+                          </span>
+                        </div>
+                        <Button asChild>
+                          <Link href={`/code-blocks/${block.id}`}>
+                            View Details
+                          </Link>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </MotionDiv>
+              ))}
+            </MotionDiv>
+
+            {/* Column 3 - 3 cards */}
+            <MotionDiv
+              variants={columnCVariants}
+              animate="animate"
+              className="flex flex-col gap-6"
+            >
+              {codeBlocks.slice(5, 8).map((block, index) => (
+                <MotionDiv
+                  key={block.id}
+                  variants={cardVariants}
+                  initial="initial"
+                  animate="animate"
+                  transition={{ delay: index * 0.3 }}
+                >
+                  <Card className="group overflow-hidden transition-all">
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <CardTitle>
+                          {block.title}
+                        </CardTitle>
+                        <div className="flex items-center space-x-2">
+                          <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">
+                            Featured
+                          </span>
+                        </div>
+                      </div>
+                      <CardDescription>By {block.author}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="mb-4 text-sm text-muted-foreground">
+                        {block.description}
+                      </p>
+                      <div className="mb-4 rounded-lg bg-muted/50 backdrop-blur-sm p-4">
+                        <pre className="overflow-x-auto">
+                          <code className="text-sm text-muted-foreground">{block.code}</code>
+                        </pre>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {block.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-muted/50 backdrop-blur-sm px-2 py-1 text-xs text-muted-foreground"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
+                        <div className="flex items-center space-x-4">
+                          <span className="flex items-center">
+                            <FiHeart className="mr-1" /> {block.stars}
+                          </span>
+                          <span className="flex items-center">
+                            <FiDownload className="mr-1" /> {block.downloads}
+                          </span>
+                        </div>
+                        <Button asChild>
+                          <Link href={`/code-blocks/${block.id}`}>
+                            View Details
+                          </Link>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </MotionDiv>
+              ))}
+            </MotionDiv>
           </MotionDiv>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-muted/20 to-background py-24">
+      {/* Footer */}
+      <footer className="relative overflow-hidden bg-gradient-to-b from-muted/20 to-background py-12">
         <div className="container relative z-10">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-            <MotionH1
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-6xl"
-            >
-              What Our Community Says
-            </MotionH1>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">UIDOCK</h3>
+              <p className="text-sm text-muted-foreground">
+                Beautiful UI sections and code blocks for modern web applications
+              </p>
+              <div className="flex space-x-4">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary"
+                  >
+                    <link.icon className="h-5 w-5" />
+                    <span className="sr-only">{link.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h4 className="mb-4 text-sm font-semibold">Resources</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="/docs">Documentation</Link></li>
+                <li><Link href="/sections">UI Sections</Link></li>
+                <li><Link href="/code-blocks">Code Blocks</Link></li>
+                <li><Link href="/blog">Blog</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="mb-4 text-sm font-semibold">Community</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="/discord">Discord</Link></li>
+                <li><Link href="/github">GitHub</Link></li>
+                <li><Link href="/twitter">Twitter</Link></li>
+                <li><Link href="/blog">Blog</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="mb-4 text-sm font-semibold">Legal</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="/privacy">Privacy Policy</Link></li>
+                <li><Link href="/terms">Terms of Service</Link></li>
+                <li><Link href="/cookies">Cookie Policy</Link></li>
+              </ul>
+            </div>
           </div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((testimonial, index) => (
-              <MotionDiv
-                key={testimonial.author}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="group h-full overflow-hidden transition-all hover:shadow-lg">
-                  <CardContent className="p-6">
-                    <div className="mb-4 flex items-center space-x-4">
-                      <div className="h-12 w-12 overflow-hidden rounded-full bg-muted">
-                        {/* Add avatar image here */}
-                      </div>
-                      <div>
-                        <p className="font-semibold">{testimonial.author}</p>
-                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                      </div>
-                    </div>
-                    <p className="text-muted-foreground">{testimonial.content}</p>
-                  </CardContent>
-                </Card>
-              </MotionDiv>
-            ))}
+          <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
+            <p>© {new Date().getFullYear()} UIDOCK. All rights reserved.</p>
           </div>
         </div>
-      </section>
-
-      {/* Community Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/20 py-24">
-        <div className="container relative z-10">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-            <MotionH1
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-6xl"
-            >
-              Join Our Community
-            </MotionH1>
-            <MotionP
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-            >
-              Connect with developers and designers from around the world
-            </MotionP>
-          </div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {communityStats.map((stat, index) => (
-              <MotionDiv
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="border-none bg-background/50 backdrop-blur">
-                  <CardContent className="flex items-center space-x-4 p-6">
-                    <div className="rounded-lg bg-primary/10 p-3">
-                      <stat.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-bold">{stat.value}</p>
-                      <p className="text-sm text-muted-foreground">{stat.label}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </MotionDiv>
-            ))}
-          </div>
-
-          <div className="mt-12 flex justify-center">
-            <Button asChild className="group">
-              <Link href="/community">
-                Join Community
-                <FiArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-muted/20 to-background py-24">
-        <div className="container relative z-10">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-            <MotionH1
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-6xl"
-            >
-              Browse by Category
-            </MotionH1>
-          </div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <MotionDiv
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <Card className="group h-full overflow-hidden transition-all hover:shadow-lg">
-                <CardHeader>
-                  <div className="rounded-lg bg-primary/10 p-3 w-fit">
-                    <FiStar className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="mt-4">Popular</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Most downloaded and starred components
-                  </p>
-                  <Button className="mt-4 group-hover:text-primary">
-                    View Popular
-                  </Button>
-                </CardContent>
-              </Card>
-            </MotionDiv>
-
-            <MotionDiv
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <Card className="group h-full overflow-hidden transition-all hover:shadow-lg">
-                <CardHeader>
-                  <div className="rounded-lg bg-primary/10 p-3 w-fit">
-                    <FiClock className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="mt-4">New Releases</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Recently published components
-                  </p>
-                  <Button className="mt-4 group-hover:text-primary">
-                    View New
-                  </Button>
-                </CardContent>
-              </Card>
-            </MotionDiv>
-
-            <MotionDiv
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-            >
-              <Card className="group h-full overflow-hidden transition-all hover:shadow-lg">
-                <CardHeader>
-                  <div className="rounded-lg bg-primary/10 p-3 w-fit">
-                    <FiTrendingUp className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="mt-4">Trending</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Components gaining popularity
-                  </p>
-                  <Button className="mt-4 group-hover:text-primary">
-                    View Trending
-                  </Button>
-                </CardContent>
-              </Card>
-            </MotionDiv>
-          </div>
-        </div>
-      </section>
+      </footer>
     </>
   )
 } 
